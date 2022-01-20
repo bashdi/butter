@@ -14,20 +14,20 @@ public class ArtikelService {
         this.repository = repository;
     }
 
-    public Artikel getArtikelByNr(int nr) throws SQLException {
-        return repository.getArtikelByNr(nr);
+    public Artikel getArtikelById(int nr) throws SQLException {
+        return repository.getArtikelById(nr);
     }
 
-    public Artikel getArtikelByName(String name) throws SQLException {
-        return repository.getArtikelByName(name);
+    public Artikel getArtikelByBezeichnung(String name) throws SQLException {
+        return repository.getArtikelByBezeichnung(name);
     }
 
-    public List<Artikel> getAllArtikel() throws SQLException {
+    public List<Artikel> getArtikelList() throws SQLException {
         return repository.getArtikelList();
     }
 
-    public List<Artikel> getArtikelByBeschreibung(String beschreibung) throws SQLException {
-        return repository.getArtikelListByBeschreibung(beschreibung);
+    public List<Artikel> getArtikelListByBezeichnung(String beschreibung) throws SQLException {
+        return repository.getArtikelListByBezeichnung(beschreibung);
     }
 
     public boolean saveArtikel(Artikel artikel) throws SQLException {

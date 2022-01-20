@@ -2,47 +2,91 @@ package com.github.bashdi.butter.entities;
 
 public class Artikel {
 
-    int nr;
-    String name;
-    String beschreibung;
+    int id;
+    String bezeichnung;
+    int preis;
+    int bestand;
+    int mindestbestand;
+    int bestellbestand;
 
-    public Artikel(String name, String beschreibung) {
-        this.name = name;
-        this.beschreibung = beschreibung;
+    public Artikel(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
     }
 
-    public Artikel(int nr, String name, String beschreibung) {
-        this.nr = nr;
-        this.name = name;
-        this.beschreibung = beschreibung;
+    public Artikel(String bezeichnung, int preis, int bestand, int mindestbestand, int bestellbestand) {
+        this.bezeichnung = bezeichnung;
+        this.preis = preis;
+        this.bestand = bestand;
+        this.mindestbestand = mindestbestand;
+        this.bestellbestand = bestellbestand;
     }
 
-    public int getNr() {
-        return nr;
+    public Artikel(int id, String bezeichnung, int preis, int bestand, int mindestbestand, int bestellbestand) {
+        this.id = id;
+        this.bezeichnung = bezeichnung;
+        this.preis = preis;
+        this.bestand = bestand;
+        this.mindestbestand = mindestbestand;
+        this.bestellbestand = bestellbestand;
     }
 
-    public void setNr(int nr) {
-        this.nr = nr;
+    public int getId() {
+        return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getBezeichnung() {
+        return bezeichnung;
     }
 
-    public String getBeschreibung() {
-        return beschreibung;
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
     }
 
-    public void setBeschreibung(String beschreibung) {
-        this.beschreibung = beschreibung;
+    public int getPreis() {
+        return preis;
+    }
+
+    public void setPreis(int preis) {
+        this.preis = preis;
+    }
+
+    public int getBestand() {
+        return bestand;
+    }
+
+    public void setBestand(int bestand) {
+        this.bestand = bestand;
+    }
+
+    public int getMindestbestand() {
+        return mindestbestand;
+    }
+
+    public void setMindestbestand(int mindestbestand) {
+        this.mindestbestand = mindestbestand;
+    }
+
+    public int getBestellbestand() {
+        return bestellbestand;
+    }
+
+    public void setBestellbestand(int bestellbestand) {
+        this.bestellbestand = bestellbestand;
     }
 
     @Override
     public String toString() {
-        return "Nr: " + nr + " Name: " + name + " Beschreibung: " + beschreibung;
+        return "Artikel{" +
+                "id=" + id +
+                ", bezeichnung='" + bezeichnung + '\'' +
+                ", preis=" + preis +
+                ", bestand=" + bestand +
+                ", mindestbestand=" + mindestbestand +
+                ", bestellbestand=" + bestellbestand +
+                '}';
     }
 }

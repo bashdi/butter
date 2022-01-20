@@ -18,6 +18,10 @@ public class ArtikelService {
         return repository.getArtikelByNr(nr);
     }
 
+    public Artikel getArtikelByName(String name) throws SQLException {
+        return repository.getArtikelByName(name);
+    }
+
     public List<Artikel> getAllArtikel() throws SQLException {
         return repository.getAllArtikel();
     }

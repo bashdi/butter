@@ -13,7 +13,6 @@ import java.util.List;
 public class ArtikelRepositoryH2 implements ArtikelRepository{
 
     AbstractDatabase database;
-    Connection connection;
 
     public ArtikelRepositoryH2(AbstractDatabase database) {
         this.database = database;
@@ -41,6 +40,25 @@ public class ArtikelRepositoryH2 implements ArtikelRepository{
         return artikel;
     }
 
+    @Override
+    public Artikel getArtikelByName(String name) throws SQLException {
+        String sql = "select nr, name, beschreibung from TblArtikel where name = ?";
+        Connection connection = database.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, name);
+
+        ResultSet resultSet = statement.executeQuery();
+        Artikel artikel = null;
+
+        if (resultSet.first()) {
+            artikel = new Artikel(resultSet.getInt("nr"),
+                    resultSet.getString("name"),
+                    resultSet.getString("beschreibung"));
+        }
+
+        return artikel;
+    }
 
 
     @Override

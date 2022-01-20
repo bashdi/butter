@@ -9,6 +9,8 @@ public interface ArtikelRepository {
 
     public Artikel getArtikelByNr(int nr) throws SQLException;
 
+    public Artikel getArtikelByName(String name) throws SQLException;
+
     public List<Artikel> getAllArtikel() throws SQLException;
 
     public List<Artikel> getArtikelByBeschreibung(String beschreibung) throws SQLException;

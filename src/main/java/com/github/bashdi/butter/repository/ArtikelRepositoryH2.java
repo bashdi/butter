@@ -27,7 +27,7 @@ public class ArtikelRepositoryH2 implements ArtikelRepository{
         Connection connection = database.getConnection();
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(0, nr);
+        statement.setInt(1, nr);
 
         ResultSet resultSet = statement.executeQuery();
         Artikel artikel = null;
@@ -76,6 +76,7 @@ public class ArtikelRepositoryH2 implements ArtikelRepository{
         Connection connection = database.getConnection();
 
         PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, beschreibung);
         ResultSet resultSet = statement.executeQuery();
 
         List<Artikel> artikelList = new ArrayList<>();
@@ -100,7 +101,7 @@ public class ArtikelRepositoryH2 implements ArtikelRepository{
     public boolean saveArtikel(Artikel artikel) throws SQLException {
         String updateSql = "update TblArtikel set name = ?, beschreibung = ? " +
                             "where nr = ?";
-        String insertSql = "insert into TblArtikel(name, beschreibung) " +
+        String insertSql = "INSERT INTO TBLARTIKEL(name, beschreibung) " +
                            "values(?, ?)";
 
         Connection connection = database.getConnection();
@@ -110,14 +111,14 @@ public class ArtikelRepositoryH2 implements ArtikelRepository{
         if (artikel.getNr() == 0) {
             statement = connection.prepareStatement(insertSql);
 
-            statement.setString(0, artikel.getName());
-            statement.setString(1, artikel.getBeschreibung());
+            statement.setString(1, artikel.getName());
+            statement.setString(2, artikel.getBeschreibung());
         } else {
             statement = connection.prepareStatement(updateSql);
 
-            statement.setString(0, artikel.getName());
-            statement.setString(1, artikel.getBeschreibung());
-            statement.setInt(2, artikel.getNr());
+            statement.setString(1, artikel.getName());
+            statement.setString(2, artikel.getBeschreibung());
+            statement.setInt(3, artikel.getNr());
         }
         return statement.execute();
     }

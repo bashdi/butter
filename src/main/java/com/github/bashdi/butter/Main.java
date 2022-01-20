@@ -10,6 +10,7 @@ import com.github.bashdi.butter.services.ArtikelService;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class Main {
 
@@ -32,15 +33,24 @@ public class Main {
 
             statement.execute(crateTableSql);
 
-
-            artikelService.saveArtikel(new Artikel("Orange", "Obst"));
-            artikelService.saveArtikel(new Artikel("Apfel", "Obst"));
+            try {
+                artikelService.saveArtikel(new Artikel("Orange", "Obst"));
+                artikelService.saveArtikel(new Artikel("Apfel", "Obst"));
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
 
             Artikel art1 = artikelService.getArtikelByNr(1);
             art1.setBeschreibung("Frucht aus Florida");
 
             artikelService.saveArtikel(art1);
 
+
+            List<Artikel> artikelList = artikelService.getArtikelByBeschreibung("obst");
+
+            artikelList.forEach( a -> {
+                System.out.println(a.toString());
+            });
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

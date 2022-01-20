@@ -23,11 +23,11 @@ public class ArtikelService {
     }
 
     public List<Artikel> getAllArtikel() throws SQLException {
-        return repository.getAllArtikel();
+        return repository.getArtikelList();
     }
 
     public List<Artikel> getArtikelByBeschreibung(String beschreibung) throws SQLException {
-        return repository.getArtikelByBeschreibung(beschreibung);
+        return repository.getArtikelListByBeschreibung(beschreibung);
     }
 
     public boolean saveArtikel(Artikel artikel) throws SQLException {

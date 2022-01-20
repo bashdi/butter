@@ -62,7 +62,7 @@ public class ArtikelRepositoryH2 implements ArtikelRepository{
 
 
     @Override
-    public List<Artikel> getAllArtikel() throws SQLException {
+    public List<Artikel> getArtikelList() throws SQLException {
         String sql = "select nr, name, beschreibung from TblArtikel";
         Connection connection = database.getConnection();
 
@@ -88,13 +88,13 @@ public class ArtikelRepositoryH2 implements ArtikelRepository{
 
 
     @Override
-    public List<Artikel> getArtikelByBeschreibung(String beschreibung) throws SQLException {
+    public List<Artikel> getArtikelListByBeschreibung(String beschreibung) throws SQLException {
         String sql = "select nr, name, beschreibung from TblArtikel " +
-                     "where beschreibung like ?";
+                     "where lower(beschreibung) like lower(?)";
         Connection connection = database.getConnection();
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, beschreibung);
+        statement.setString(1, "%" + beschreibung + "%");
         ResultSet resultSet = statement.executeQuery();
 
         List<Artikel> artikelList = new ArrayList<>();

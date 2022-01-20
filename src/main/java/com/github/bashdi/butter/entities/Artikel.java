@@ -40,4 +40,9 @@ public class Artikel {
     public void setBeschreibung(String beschreibung) {
         this.beschreibung = beschreibung;
     }
+
+    @Override
+    public String toString() {
+        return "Nr: " + nr + " Name: " + name + " Beschreibung: " + beschreibung;
+    }
 }

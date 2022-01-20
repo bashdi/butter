@@ -11,9 +11,9 @@ public interface ArtikelRepository {
 
     public Artikel getArtikelByName(String name) throws SQLException;
 
-    public List<Artikel> getAllArtikel() throws SQLException;
+    public List<Artikel> getArtikelList() throws SQLException;
 
-    public List<Artikel> getArtikelByBeschreibung(String beschreibung) throws SQLException;
+    public List<Artikel> getArtikelListByBeschreibung(String beschreibung) throws SQLException;
 
     public boolean saveArtikel(Artikel artikel) throws SQLException;
 }

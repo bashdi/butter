@@ -14,20 +14,24 @@ import java.sql.Statement;
 public class Main {
 
     public static void main(String[] args) {
+
+        AbstractDatabase database = null;
         try {
-            AbstractDatabase database = new H2Database("test");
+            database = new H2Database("test");
             ArtikelRepository artikelRepository = new ArtikelRepositoryH2(database);
             ArtikelService artikelService = new ArtikelService(artikelRepository);
 
             //Tabelle erstellen
             Connection connection = database.getConnection();
-            String crateTableSql = "create table TblArtikel(nr int auto_increment, " +
-                                    "name varchar(300), beschreibung varchar(500))";
+            String crateTableSql = "create table if not exists TblArtikel(nr int auto_increment, " +
+                                    "name varchar(300) unique, " +
+                                    "beschreibung varchar(500), " +
+                                    "PRIMARY KEY (nr) " +
+                                    ")";
             Statement statement = connection.createStatement();
 
-            if (!statement.execute(crateTableSql)) {
-                return;
-            }
+            statement.execute(crateTableSql);
+
 
             artikelService.saveArtikel(new Artikel("Orange", "Obst"));
             artikelService.saveArtikel(new Artikel("Apfel", "Obst"));
@@ -42,6 +46,10 @@ public class Main {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (database != null) {
+                database.close();
+            }
         }
     }
 }

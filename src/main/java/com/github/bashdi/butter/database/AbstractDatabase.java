@@ -6,11 +6,27 @@ import java.sql.SQLException;
 
 public abstract class AbstractDatabase {
 
+    Connection connection;
+
     public abstract Connection getConnection() throws SQLException;
 
-    Connection getConnection(String connectionString) throws SQLException {
-        Connection connection = DriverManager.getConnection(connectionString);
+    protected Connection getConnection(String connectionString) throws SQLException {
 
-        return connection;
+        if (this.connection == null || this.connection.isClosed()) {
+            this.connection = DriverManager.getConnection(connectionString);
+        }
+
+        return this.connection;
+    }
+
+    public void close() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+
+        }
+
     }
 }

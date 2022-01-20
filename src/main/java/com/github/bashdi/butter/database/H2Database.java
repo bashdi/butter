@@ -5,13 +5,12 @@ import java.sql.SQLException;
 
 public class H2Database extends AbstractDatabase{
 
-    final String CONNECTION_STRING_TEMPLATE = "jdbc:h2:file:~/{filename};";
+    final String CONNECTION_STRING_TEMPLATE = "jdbc:h2:file:./{filename};";
     String connectionString;
 
 
 
     public H2Database(String filename) throws ClassNotFoundException {
-        //Class.forName( "org.hsqldb.jdbcDriver" );
         connectionString = CONNECTION_STRING_TEMPLATE.replace("{filename}", filename);
     }
 

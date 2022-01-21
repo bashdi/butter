@@ -132,7 +132,7 @@ public class ArtikelRepositoryH2 implements ArtikelRepository{
 
 
     @Override
-    public boolean saveArtikel(Artikel artikel) throws SQLException {
+    public void saveArtikel(Artikel artikel) throws SQLException {
         String updateSql = "update TblArtikel set bezeichnung = ?, preis = ?, bestand = ?, mindestbestand = ?, bestellbestand = ? " +
                             "where id = ?";
         String insertSql = "INSERT INTO TBLARTIKEL(bezeichnung, preis, bestand, mindestbestand, bestellbestand) " +
@@ -160,6 +160,19 @@ public class ArtikelRepositoryH2 implements ArtikelRepository{
             statement.setInt(5, artikel.getBestellbestand());
             statement.setInt(6, artikel.getId());
         }
-        return statement.execute();
+        statement.execute();
+    }
+
+    @Override
+    public void deleteArtikelById(int id) throws SQLException {
+        String sql = "delete from tblArtikel where id = ?";
+
+        Connection connection = database.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        statement.setInt(1, id);
+
+        statement.execute();
     }
 }

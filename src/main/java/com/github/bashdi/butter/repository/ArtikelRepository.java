@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ArtikelRepository {
 
-    public Artikel getArtikelById(int nr) throws SQLException;
+    public Artikel getArtikelById(int id) throws SQLException;
 
     public Artikel getArtikelByBezeichnung(String name) throws SQLException;
 
@@ -15,5 +15,7 @@ public interface ArtikelRepository {
 
     public List<Artikel> getArtikelListByBezeichnung(String beschreibung) throws SQLException;
 
-    public boolean saveArtikel(Artikel artikel) throws SQLException;
+    public void saveArtikel(Artikel artikel) throws SQLException;
+
+    public void deleteArtikelById(int id) throws SQLException;
 }

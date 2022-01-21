@@ -30,8 +30,12 @@ public class ArtikelService {
         return repository.getArtikelListByBezeichnung(beschreibung);
     }
 
-    public boolean saveArtikel(Artikel artikel) throws SQLException {
-        return repository.saveArtikel(artikel);
+    public void saveArtikel(Artikel artikel) throws SQLException {
+        repository.saveArtikel(artikel);
+    }
+
+    public void deleteArtikelById(int id) throws SQLException {
+        repository.deleteArtikelById(id);
     }
 
 

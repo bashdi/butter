@@ -205,6 +205,7 @@ public class ModifyArtikelDialog extends JDialog {
 
         pack();
         setResizable(false);
+        setLocation(MouseInfo.getPointerInfo().getLocation());
         setVisible(true);
     }
 

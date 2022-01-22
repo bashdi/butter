@@ -23,11 +23,13 @@ public class ArtikelFrame extends JFrame {
     Vector<Vector<String>> tableContentVector;
     JTable artikelTable;
     JScrollPane tableScrollPane;
+    JFrame thisJFrame;
 
 
     public ArtikelFrame() {
         setTitle("Artikelverwaltung");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        thisJFrame = this;
 
         initArtikelService();
 
@@ -38,13 +40,14 @@ public class ArtikelFrame extends JFrame {
 
 
         pack();
+        setResizable(false);
         setVisible(true);
     }
 
 
 
     private void initArtikelService() {
-        AbstractDatabase database = new H2Database("test");
+        AbstractDatabase database = new H2Database("artikelverwaltung");
         ArtikelRepository artikelRepository = new ArtikelRepositoryH2(database);
         artikelService = new ArtikelService(artikelRepository);
     }
@@ -58,6 +61,39 @@ public class ArtikelFrame extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
+        //NeuerArtikel-Button in MenuBar
+        JMenu artikelMenu = new JMenu("Artikel");
+        menuBar.add(artikelMenu);
+
+        JMenuItem newArtikelMenuItem = new JMenuItem("Neu");
+        artikelMenu.add(newArtikelMenuItem);
+
+        newArtikelMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ModifyArtikelDialog(thisJFrame, artikelService);
+            }
+        });
+
+        JMenuItem changeArtikelMenuItem = new JMenuItem("Bearbeiten");
+        artikelMenu.add(changeArtikelMenuItem);
+
+        changeArtikelMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = artikelTable.getSelectedRow();
+                if (selectedRow < 0) return;
+
+                int selectedArtikelid = Integer.parseInt((String)artikelTable.getValueAt(
+                        selectedRow,
+                        0
+                ));
+
+                new ModifyArtikelDialog(thisJFrame, artikelService, selectedArtikelid);
+
+            }
+        });
+
         //Export menu
         JMenu exportMenu = new JMenu("Export");
         menuBar.add(exportMenu);
@@ -67,6 +103,8 @@ public class ArtikelFrame extends JFrame {
 
         JMenuItem exportJsonMenuItem = new JMenuItem("Export as JSON");
         exportMenu.add(exportJsonMenuItem);
+
+
 
     }
 
@@ -185,17 +223,11 @@ public class ArtikelFrame extends JFrame {
         //Tabelleninhalt
         tableContentVector = new Vector<>();
         Vector<String> testArtikelVector = new Vector<>();
-        testArtikelVector.add("6666");
-        testArtikelVector.add("Test");
-        testArtikelVector.add("10000");
-        testArtikelVector.add("123");
-        testArtikelVector.add("100");
-        testArtikelVector.add("130");
-        tableContentVector.add(testArtikelVector);
 
         artikelTable = new JTable(tableContentVector, columnNamesVector);
         artikelTable.setPreferredScrollableViewportSize(new Dimension(800, 600));
         artikelTable.setFillsViewportHeight(true);
+        artikelTable.setOpaque(true);
         artikelTable.getColumnModel().getColumn(0).setPreferredWidth(20);
         artikelTable.getColumnModel().getColumn(1).setPreferredWidth(300);
         tableScrollPane = new JScrollPane(artikelTable);

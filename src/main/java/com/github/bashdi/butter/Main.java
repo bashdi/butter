@@ -3,6 +3,7 @@ package com.github.bashdi.butter;
 import com.github.bashdi.butter.database.AbstractDatabase;
 import com.github.bashdi.butter.database.H2Database;
 import com.github.bashdi.butter.entities.Artikel;
+import com.github.bashdi.butter.gui.ArtikelFrame;
 import com.github.bashdi.butter.repository.ArtikelRepository;
 import com.github.bashdi.butter.repository.ArtikelRepositoryH2;
 import com.github.bashdi.butter.services.ArtikelService;
@@ -72,8 +73,7 @@ public class Main {
                 System.out.println(a.toString());
             });
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

@@ -10,7 +10,7 @@ public class H2Database extends AbstractDatabase{
 
 
 
-    public H2Database(String filename) throws ClassNotFoundException {
+    public H2Database(String filename) {
         connectionString = CONNECTION_STRING_TEMPLATE.replace("{filename}", filename);
     }
 

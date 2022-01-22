@@ -61,10 +61,13 @@ public class ArtikelFrame extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
-        //NeuerArtikel-Button in MenuBar
+
+
+        //Artikel menu
         JMenu artikelMenu = new JMenu("Artikel");
         menuBar.add(artikelMenu);
 
+        //Neu
         JMenuItem newArtikelMenuItem = new JMenuItem("Neu");
         artikelMenu.add(newArtikelMenuItem);
 
@@ -75,6 +78,7 @@ public class ArtikelFrame extends JFrame {
             }
         });
 
+        //Bearbeiten
         JMenuItem changeArtikelMenuItem = new JMenuItem("Bearbeiten");
         artikelMenu.add(changeArtikelMenuItem);
 
@@ -93,6 +97,19 @@ public class ArtikelFrame extends JFrame {
 
             }
         });
+
+        //Löschen
+        JMenuItem deleteArtikelMenuItem = new JMenuItem("Löschen");
+        artikelMenu.add(deleteArtikelMenuItem);
+
+        deleteArtikelMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+
 
         //Export menu
         JMenu exportMenu = new JMenu("Export");

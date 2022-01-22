@@ -81,5 +81,7 @@ public class Main {
                 database.close();
             }
         }
+
+        ArtikelFrame artikelFrame = new ArtikelFrame();
     }
 }

@@ -30,6 +30,10 @@ public class ArtikelService {
         return repository.getArtikelListByBezeichnung(beschreibung);
     }
 
+    public List<Artikel> getArtikelWithStockSmallerMinimumStock() throws SQLException {
+        return repository.getArtikelWithStockSmallerMinimumStock();
+    }
+
     public void saveArtikel(Artikel artikel) throws SQLException {
         repository.saveArtikel(artikel);
     }

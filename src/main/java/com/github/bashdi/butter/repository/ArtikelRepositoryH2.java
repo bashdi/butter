@@ -129,6 +129,34 @@ public class ArtikelRepositoryH2 implements ArtikelRepository{
         return artikelList;
     }
 
+    @Override
+    public List<Artikel> getArtikelWithStockSmallerMinimumStock() throws SQLException {
+        String sql = "select id, bezeichnung, preis, bestand, mindestbestand, bestellbestand from TblArtikel " +
+                "where mindestbestand > bestand";
+        Connection connection = database.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+
+        List<Artikel> artikelList = new ArrayList<>();
+
+        if (!resultSet.first()) {
+            return  artikelList;
+        }
+
+        do {
+            Artikel artikel = new Artikel(resultSet.getInt("id"),
+                    resultSet.getString("bezeichnung"),
+                    resultSet.getInt("preis"),
+                    resultSet.getInt("bestand"),
+                    resultSet.getInt("mindestbestand"),
+                    resultSet.getInt("bestellbestand")
+            );
+            artikelList.add(artikel);
+        } while (resultSet.next());
+
+        return artikelList;
+    }
 
 
     @Override

@@ -15,6 +15,8 @@ public interface ArtikelRepository {
 
     public List<Artikel> getArtikelListByBezeichnung(String beschreibung) throws SQLException;
 
+    public List<Artikel> getArtikelWithStockSmallerMinimumStock() throws SQLException;
+
     public void saveArtikel(Artikel artikel) throws SQLException;
 
     public void deleteArtikelById(int id) throws SQLException;

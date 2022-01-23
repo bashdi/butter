@@ -157,7 +157,7 @@ public class ArtikelFrame extends JFrame {
 
 
 
-        //Alle Artikel holen Button
+        //Artikel suchen Button
         gbc.gridx = 0;
         gbc.gridy = 2;
 
@@ -224,9 +224,30 @@ public class ArtikelFrame extends JFrame {
 
 
 
-        //Artikeltabelle
+        //Alle Artikel mit Bestand geriner Mindestbestand holen Button
         gbc.gridx = 0;
         gbc.gridy = 4;
+
+        JButton getAllArtikelWithStockSmallerMinimumStockButton = new JButton("Alle Artikel mit geringem Bestand");
+        artikelsuchePanel.add(getAllArtikelWithStockSmallerMinimumStockButton, gbc);
+
+        getAllArtikelWithStockSmallerMinimumStockButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    tableContentVector.clear();
+                    addArtikelToTableContent(artikelService.getArtikelWithStockSmallerMinimumStock());
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+
+
+        //Artikeltabelle
+        gbc.gridx = 0;
+        gbc.gridy = 5;
 
         //Tabellenspaltennamen
         Vector<String> columnNamesVector = new Vector<>();

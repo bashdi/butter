@@ -39,7 +39,6 @@
                 </execution>
             </executions>
             <configuration>
-                <!-- ... -->
                 <archive>
                     <manifest>
                         <mainClass>com.github.bashdi.butter.Main</mainClass>

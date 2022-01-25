@@ -166,22 +166,21 @@ public class ModifyArtikelDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    int id = 0;
                     if (artikel != null) {
-                        artikel.setBezeichnung(bezeichnungTextField.getText());
-                    } else {
-                        artikel = new Artikel(bezeichnungTextField.getText());
+                        id = artikel.id();
                     }
-
-                    artikel.setPreis(Integer.parseInt(preisTextField.getText()));
-                    artikel.setBestand(Integer.parseInt(bestandTextField.getText()));
-                    artikel.setMindestbestand(Integer.parseInt(mindestbestandTextField.getText()));
-                    artikel.setBestellbestand(Integer.parseInt(bestellbestandTextField.getText()));
+                    artikel = new Artikel(id, bezeichnungTextField.getText(),
+                            Integer.parseInt(preisTextField.getText()),
+                            Integer.parseInt(bestandTextField.getText()),
+                            Integer.parseInt(mindestbestandTextField.getText()),
+                            Integer.parseInt(bestellbestandTextField.getText()));
 
                     artikelService.saveArtikel(artikel);
                     JOptionPane.showMessageDialog(thisDialog, "Gespeichert", "Gespeichert", JOptionPane.INFORMATION_MESSAGE, null);
 
-                    artikel = artikelService.getArtikelByBezeichnung(artikel.getBezeichnung());
-                    idTextField.setText(String.valueOf(artikel.getId()));
+                    artikel = artikelService.getArtikelByBezeichnung(artikel.bezeichnung());
+                    idTextField.setText(String.valueOf(artikel.id()));
 
                 } catch (NumberFormatException | SQLException ex) {
                     JOptionPane.showMessageDialog(thisDialog, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE, null);
@@ -193,12 +192,12 @@ public class ModifyArtikelDialog extends JDialog {
 
         //Textfelder füllen
         if (artikel != null) {
-            idTextField.setText(String.valueOf(artikel.getId()));
-            bezeichnungTextField.setText(artikel.getBezeichnung());
-            preisTextField.setText(String.valueOf(artikel.getPreis()));
-            bestandTextField.setText(String.valueOf(artikel.getBestand()));
-            mindestbestandTextField.setText(String.valueOf(artikel.getMindestbestand()));
-            bestellbestandTextField.setText(String.valueOf(artikel.getBestellbestand()));
+            idTextField.setText(String.valueOf(artikel.id()));
+            bezeichnungTextField.setText(artikel.bezeichnung());
+            preisTextField.setText(String.valueOf(artikel.preis()));
+            bestandTextField.setText(String.valueOf(artikel.bestand()));
+            mindestbestandTextField.setText(String.valueOf(artikel.mindestbestand()));
+            bestellbestandTextField.setText(String.valueOf(artikel.bestellbestand()));
         }
 
 

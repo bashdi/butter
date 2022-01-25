@@ -170,23 +170,23 @@ public class ArtikelRepositoryH2 implements ArtikelRepository{
 
 
         PreparedStatement statement;
-        if (artikel.getId() == 0) {
+        if (artikel.id() == 0) {
             statement = connection.prepareStatement(insertSql);
 
-            statement.setString(1, artikel.getBezeichnung());
-            statement.setInt(2, artikel.getPreis());
-            statement.setInt(3, artikel.getBestand());
-            statement.setInt(4, artikel.getMindestbestand());
-            statement.setInt(5, artikel.getBestellbestand());
+            statement.setString(1, artikel.bezeichnung());
+            statement.setInt(2, artikel.preis());
+            statement.setInt(3, artikel.bestand());
+            statement.setInt(4, artikel.mindestbestand());
+            statement.setInt(5, artikel.bestellbestand());
         } else {
             statement = connection.prepareStatement(updateSql);
 
-            statement.setString(1, artikel.getBezeichnung());
-            statement.setInt(2, artikel.getPreis());
-            statement.setInt(3, artikel.getBestand());
-            statement.setInt(4, artikel.getMindestbestand());
-            statement.setInt(5, artikel.getBestellbestand());
-            statement.setInt(6, artikel.getId());
+            statement.setString(1, artikel.bezeichnung());
+            statement.setInt(2, artikel.preis());
+            statement.setInt(3, artikel.bestand());
+            statement.setInt(4, artikel.mindestbestand());
+            statement.setInt(5, artikel.bestellbestand());
+            statement.setInt(6, artikel.id());
         }
         statement.execute();
     }

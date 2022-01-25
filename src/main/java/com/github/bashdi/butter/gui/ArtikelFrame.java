@@ -290,12 +290,12 @@ public class ArtikelFrame extends JFrame {
 
         for (Artikel artikel : artikelList) {
             Vector<String> newContent = new Vector<>();
-            newContent.add(String.valueOf(artikel.getId()));
-            newContent.add(artikel.getBezeichnung());
-            newContent.add(String.valueOf(artikel.getPreis()));
-            newContent.add(String.valueOf(artikel.getBestand()));
-            newContent.add(String.valueOf(artikel.getMindestbestand()));
-            newContent.add(String.valueOf(artikel.getBestellbestand()));
+            newContent.add(String.valueOf(artikel.id()));
+            newContent.add(artikel.bezeichnung());
+            newContent.add(String.valueOf(artikel.preis()));
+            newContent.add(String.valueOf(artikel.bestand()));
+            newContent.add(String.valueOf(artikel.mindestbestand()));
+            newContent.add(String.valueOf(artikel.bestellbestand()));
             tableContentVector.add(newContent);
         }
         artikelTable.repaint();

@@ -8,9 +8,12 @@ import com.github.bashdi.butter.repository.ArtikelRepositoryH2;
 import com.github.bashdi.butter.services.ArtikelService;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,9 +120,33 @@ public class ArtikelFrame extends JFrame {
 
         JMenuItem exportCsvMenuItem = new JMenuItem("Export as CSV");
         exportMenu.add(exportCsvMenuItem);
+        exportCsvMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                FileFilter filter = new FileNameExtensionFilter("csv", "csv");
+                fileChooser.setFileFilter(filter);
+                fileChooser.showSaveDialog(thisJFrame);
+
+                File file = fileChooser.getSelectedFile();
+                //csvExport
+            }
+        });
 
         JMenuItem exportJsonMenuItem = new JMenuItem("Export as JSON");
         exportMenu.add(exportJsonMenuItem);
+        exportJsonMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                FileFilter filter = new FileNameExtensionFilter("json", "json");
+                fileChooser.setFileFilter(filter);
+                fileChooser.showSaveDialog(thisJFrame);
+
+                File file = fileChooser.getSelectedFile();
+                //jsonExport
+            }
+        });
 
 
 

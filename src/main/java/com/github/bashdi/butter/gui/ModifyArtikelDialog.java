@@ -88,6 +88,7 @@ public class ModifyArtikelDialog extends JDialog {
         gbc.gridy = 2;
 
         JTextField preisTextField = new JTextField();
+        preisTextField.setText("0");
         add(preisTextField, gbc);
 
 
@@ -104,6 +105,7 @@ public class ModifyArtikelDialog extends JDialog {
         gbc.gridy = 3;
 
         JTextField bestandTextField = new JTextField();
+        bestandTextField.setText("0");
         add(bestandTextField, gbc);
 
 
@@ -120,6 +122,7 @@ public class ModifyArtikelDialog extends JDialog {
         gbc.gridy = 4;
 
         JTextField mindestbestandTextField = new JTextField();
+        mindestbestandTextField.setText("0");
         add(mindestbestandTextField, gbc);
 
 
@@ -136,6 +139,7 @@ public class ModifyArtikelDialog extends JDialog {
         gbc.gridy = 5;
 
         JTextField bestellbestandTextField = new JTextField();
+        bestellbestandTextField.setText("0");
         add(bestellbestandTextField, gbc);
 
 

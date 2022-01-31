@@ -3,6 +3,8 @@ package com.github.bashdi.butter.gui;
 import com.github.bashdi.butter.database.AbstractDatabase;
 import com.github.bashdi.butter.database.H2Database;
 import com.github.bashdi.butter.entities.Artikel;
+import com.github.bashdi.butter.exporter.ArtikelExporter;
+import com.github.bashdi.butter.exporter.ArtikelExporterCSV;
 import com.github.bashdi.butter.repository.ArtikelRepository;
 import com.github.bashdi.butter.repository.ArtikelRepositoryH2;
 import com.github.bashdi.butter.services.ArtikelService;
@@ -27,6 +29,8 @@ public class ArtikelFrame extends JFrame {
     JTable artikelTable;
     JScrollPane tableScrollPane;
     JFrame thisJFrame;
+
+    List<Artikel> currentlyDisplayedArtikel;
 
 
     public ArtikelFrame() {
@@ -118,7 +122,7 @@ public class ArtikelFrame extends JFrame {
         JMenu exportMenu = new JMenu("Export");
         menuBar.add(exportMenu);
 
-        JMenuItem exportCsvMenuItem = new JMenuItem("Export as CSV");
+        JMenuItem exportCsvMenuItem = new JMenuItem("csv");
         exportMenu.add(exportCsvMenuItem);
         exportCsvMenuItem.addActionListener(new ActionListener() {
             @Override
@@ -130,10 +134,12 @@ public class ArtikelFrame extends JFrame {
 
                 File file = fileChooser.getSelectedFile();
                 //csvExport
+                ArtikelExporter artikelExporter = new ArtikelExporterCSV();
+                artikelExporter.export(file, currentlyDisplayedArtikel);
             }
         });
 
-        JMenuItem exportJsonMenuItem = new JMenuItem("Export as JSON");
+        JMenuItem exportJsonMenuItem = new JMenuItem("json");
         exportMenu.add(exportJsonMenuItem);
         exportJsonMenuItem.addActionListener(new ActionListener() {
             @Override
@@ -300,6 +306,8 @@ public class ArtikelFrame extends JFrame {
 
         artikelsuchePanel.add(tableScrollPane, gbc);
 
+        currentlyDisplayedArtikel = new ArrayList<>();
+
 
 
 
@@ -314,6 +322,9 @@ public class ArtikelFrame extends JFrame {
      * @param artikelList
      */
     public void addArtikelToTableContent(List<Artikel> artikelList) {
+        //Aktuell angezeigte Artikel für möglichen Export speichern
+        currentlyDisplayedArtikel.clear();
+        currentlyDisplayedArtikel.addAll(artikelList);
 
         for (Artikel artikel : artikelList) {
             Vector<String> newContent = new Vector<>();

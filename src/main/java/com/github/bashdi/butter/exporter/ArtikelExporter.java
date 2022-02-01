@@ -9,5 +9,7 @@ public interface ArtikelExporter {
 
     public String getBezeichnung();
 
+    public String[] getDateiendungen();
+
     public void export(File file, List<Artikel> artikelList);
 }

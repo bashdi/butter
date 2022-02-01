@@ -122,39 +122,30 @@ public class ArtikelFrame extends JFrame {
         JMenu exportMenu = new JMenu("Export");
         menuBar.add(exportMenu);
 
-        JMenuItem exportCsvMenuItem = new JMenuItem("csv");
-        exportMenu.add(exportCsvMenuItem);
-        exportCsvMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                FileFilter filter = new FileNameExtensionFilter("csv", "csv");
-                fileChooser.setFileFilter(filter);
-                fileChooser.showSaveDialog(thisJFrame);
+        List<ArtikelExporter> artikelExporterList = new ArrayList<>();
+        //csv-export hinzufügen
+        artikelExporterList.add(new ArtikelExporterCSV());
 
-                File file = fileChooser.getSelectedFile();
-                //csvExport
-                ArtikelExporter artikelExporter = new ArtikelExporterCSV();
-                artikelExporter.export(file, currentlyDisplayedArtikel);
-            }
-        });
+        for (ArtikelExporter artikelExporter : artikelExporterList) {
+            JMenuItem exporterMenuItem = new JMenuItem(artikelExporter.getBezeichnung());
+            exportMenu.add(exporterMenuItem);
+            exporterMenuItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JFileChooser fileChooser = new JFileChooser();
+                    FileFilter filter = new FileNameExtensionFilter(artikelExporter.getBezeichnung(), artikelExporter.getDateiendungen());
+                    fileChooser.setFileFilter(filter);
+                    fileChooser.showSaveDialog(thisJFrame);
 
-        JMenuItem exportJsonMenuItem = new JMenuItem("json");
-        exportMenu.add(exportJsonMenuItem);
-        exportJsonMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                FileFilter filter = new FileNameExtensionFilter("json", "json");
-                fileChooser.setFileFilter(filter);
-                fileChooser.showSaveDialog(thisJFrame);
+                    File file = fileChooser.getSelectedFile();
 
-                File file = fileChooser.getSelectedFile();
-                //jsonExport
-            }
-        });
+                    if (file != null) {
+                        artikelExporter.export(file, currentlyDisplayedArtikel);
+                    }
 
-
+                }
+            });
+        }
 
     }
 

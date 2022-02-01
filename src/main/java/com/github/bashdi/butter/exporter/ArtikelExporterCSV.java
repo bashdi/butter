@@ -15,6 +15,11 @@ public class ArtikelExporterCSV implements ArtikelExporter{
     }
 
     @Override
+    public String[] getDateiendungen() {
+        return new String[]{"csv"};
+    }
+
+    @Override
     public void export(File file, List<Artikel> artikelList) {
         StringBuilder csvString = new StringBuilder();
 

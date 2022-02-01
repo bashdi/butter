@@ -13,6 +13,7 @@ import com.github.bashdi.butter.services.ArtikelService;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +27,7 @@ public class ArtikelFrame extends JFrame {
 
     ArtikelService artikelService;
 
-    Vector<Vector<String>> tableContentVector;
+    DefaultTableModel tableContent;
     JTable artikelTable;
     JScrollPane tableScrollPane;
     JFrame thisJFrame;
@@ -239,7 +240,7 @@ public class ArtikelFrame extends JFrame {
                     ex.printStackTrace();
                 }
 
-                tableContentVector.clear();
+                tableContent.getDataVector().clear();
                 addArtikelToTableContent(artikelList);
             }
         });
@@ -257,7 +258,7 @@ public class ArtikelFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    tableContentVector.clear();
+                    tableContent.getDataVector().clear();
                     addArtikelToTableContent(artikelService.getArtikelList());
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -278,7 +279,7 @@ public class ArtikelFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    tableContentVector.clear();
+                    tableContent.getDataVector().clear();
                     addArtikelToTableContent(artikelService.getArtikelWithStockSmallerMinimumStock());
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -302,10 +303,9 @@ public class ArtikelFrame extends JFrame {
         columnNamesVector.add("Bestellbestand");
 
         //Tabelleninhalt
-        tableContentVector = new Vector<>();
-        Vector<String> testArtikelVector = new Vector<>();
+        tableContent = new DefaultTableModel(columnNamesVector, 0);
 
-        artikelTable = new JTable(tableContentVector, columnNamesVector);
+        artikelTable = new JTable(tableContent);
         artikelTable.setPreferredScrollableViewportSize(new Dimension(800, 600));
         artikelTable.setFillsViewportHeight(true);
         artikelTable.setOpaque(true);
@@ -313,6 +313,7 @@ public class ArtikelFrame extends JFrame {
         artikelTable.getColumnModel().getColumn(1).setPreferredWidth(300);
         tableScrollPane = new JScrollPane(artikelTable);
         tableScrollPane.setSize(1000, 300);
+        tableScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         artikelsuchePanel.add(tableScrollPane, gbc);
 
@@ -344,8 +345,7 @@ public class ArtikelFrame extends JFrame {
             newContent.add(String.valueOf(artikel.getBestand()));
             newContent.add(String.valueOf(artikel.getMindestbestand()));
             newContent.add(String.valueOf(artikel.getBestellbestand()));
-            tableContentVector.add(newContent);
+            tableContent.addRow(newContent);
         }
-        artikelTable.repaint();
     }
 }

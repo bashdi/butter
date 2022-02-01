@@ -5,6 +5,7 @@ import com.github.bashdi.butter.database.H2Database;
 import com.github.bashdi.butter.entities.Artikel;
 import com.github.bashdi.butter.exporter.ArtikelExporter;
 import com.github.bashdi.butter.exporter.ArtikelExporterCSV;
+import com.github.bashdi.butter.exporter.ArtikelExporterJson;
 import com.github.bashdi.butter.repository.ArtikelRepository;
 import com.github.bashdi.butter.repository.ArtikelRepositoryH2;
 import com.github.bashdi.butter.services.ArtikelService;
@@ -125,6 +126,8 @@ public class ArtikelFrame extends JFrame {
         List<ArtikelExporter> artikelExporterList = new ArrayList<>();
         //csv-export hinzufügen
         artikelExporterList.add(new ArtikelExporterCSV());
+        //json-export hinzufügen
+        artikelExporterList.add(new ArtikelExporterJson());
 
         for (ArtikelExporter artikelExporter : artikelExporterList) {
             JMenuItem exporterMenuItem = new JMenuItem(artikelExporter.getBezeichnung());

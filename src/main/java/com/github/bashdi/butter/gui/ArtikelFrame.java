@@ -113,7 +113,23 @@ public class ArtikelFrame extends JFrame {
         deleteArtikelMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (artikelTable.getSelectedRowCount() != 1) {
+                    return;
+                }
+                String artikelBezeichnung = (String) artikelTable.getValueAt(artikelTable.getSelectedRow(),1);
+                int artikelId = Integer.parseInt((String) artikelTable.getValueAt(artikelTable.getSelectedRow(),0));
 
+                int auswahl = JOptionPane.showConfirmDialog(thisJFrame, "Artikel: " + artikelId + " - " + artikelBezeichnung, "Artikel löschen", JOptionPane.OK_CANCEL_OPTION);
+
+                if (auswahl != 0) {
+                    return;
+                }
+
+                try {
+                    artikelService.deleteArtikelById(Integer.parseInt((String) artikelTable.getValueAt(artikelTable.getSelectedRow(),0)));
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 

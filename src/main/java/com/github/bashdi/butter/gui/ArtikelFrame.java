@@ -306,7 +306,7 @@ public class ArtikelFrame extends JFrame {
         tableContent = new DefaultTableModel(columnNamesVector, 0);
 
         artikelTable = new JTable(tableContent);
-        artikelTable.setPreferredScrollableViewportSize(new Dimension(800, 600));
+        artikelTable.setPreferredScrollableViewportSize(new Dimension(800, 300));
         artikelTable.setFillsViewportHeight(true);
         artikelTable.setOpaque(true);
         artikelTable.getColumnModel().getColumn(0).setPreferredWidth(20);

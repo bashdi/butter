@@ -312,7 +312,6 @@ public class ArtikelFrame extends JFrame {
         artikelTable.getColumnModel().getColumn(0).setPreferredWidth(20);
         artikelTable.getColumnModel().getColumn(1).setPreferredWidth(300);
         tableScrollPane = new JScrollPane(artikelTable);
-        tableScrollPane.setSize(1000, 300);
         tableScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         artikelsuchePanel.add(tableScrollPane, gbc);
